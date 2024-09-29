@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #e0e2e4;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -35,4 +35,93 @@
   to {
     transform: rotate(360deg);
   }
+}
+.App {
+  padding: 0px;
+  font-family: Arial, sans-serif;
+}
+
+.kanban-board {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f4f5f7;
+}
+
+/* Columns */
+.group-column {
+  border-radius: 8px;
+  padding: 10px;
+  flex: 1;
+  min-width: 250px;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+}
+
+.group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.ticket-list {
+  margin-top: 10px;
+}
+/* Group Header */
+.group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.group-info {
+  display: flex;
+  align-items: center;
+}
+
+.group-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.group-name {
+  font-weight: 500;
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+.group-count {
+  color: #888;
+  font-size: 12px;
+}
+
+.group-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action-icon {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.ticket-list {
+  margin-top: 10px;
+}
+.user-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  padding: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
 }
