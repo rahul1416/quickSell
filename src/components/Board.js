@@ -1,34 +1,37 @@
 import React from 'react';
 import TicketCard from './TicketCard';
-import addIcon from '../images/add.svg'; // Add icon
-import menuIcon from '../images/3 dot menu.svg'; // Menu icon
-import inProgressIcon from '../images/in-progress.svg'; // In Progress icon
-import toDoIcon from '../images/To-do.svg'; // To Do icon
-import backLogIcon from '../images/Backlog.svg'; // Backlog icon
+import addIcon from '../images/add.svg';
+import menuIcon from '../images/3 dot menu.svg';
+import inProgressIcon from '../images/in-progress.svg';
+import toDoIcon from '../images/To-do.svg';
+import backLogIcon from '../images/Backlog.svg';
+import doneIcon from '../images/Done.svg';
+import cancelIcon from '../images/Cancelled.svg'
 import userIcon from '../images/user.svg';
-import urgentIcon from '../images/SVG - Urgent Priority colour.svg'; // Urgent (Priority level 4)
-import highIcon from '../images/Img - High Priority.svg'; // High (Priority level 3)
-import mediumIcon from '../images/Img - Medium Priority.svg'; // Medium (Priority level 2)
-import lowIcon from '../images/Img - Low Priority.svg'; // Low (Priority level 1)
-import noPriorityIcon from '../images/No-priority.svg'; // No priority (Priority level 0)
-
-
+import urgentIcon from '../images/SVG - Urgent Priority colour.svg';
+import highIcon from '../images/Img - High Priority.svg';
+import mediumIcon from '../images/Img - Medium Priority.svg';
+import lowIcon from '../images/Img - Low Priority.svg';
+import noPriorityIcon from '../images/No-priority.svg';
 
 const Board = ({ tickets, groupBy }) => {
-  // Group tickets based on criteria
   const groupedTickets = tickets.reduce((acc, ticket) => {
     const groupKey = groupBy === 'status' ? ticket.status :
-                     groupBy === 'user' ? ticket.userId :
-                     ticket.priority;
+      groupBy === 'user' ? ticket.userId :
+      ticket.priority;
 
     if (!acc[groupKey]) acc[groupKey] = [];
     acc[groupKey].push(ticket);
     return acc;
   }, {});
 
-  // Function to render status icons based on the group using a switch statement
+  // Add empty groups for 'Done' and 'Cancelled' when grouped by status
+  if (groupBy === 'status') {
+    if (!groupedTickets['Done']) groupedTickets['Done'] = [];
+    if (!groupedTickets['Cancelled']) groupedTickets['Cancelled'] = [];
+  }
+
   const renderStatusIcon = (group) => {
-    // console.log(group)
     switch (group) {
       case 'In progress':
         return <img src={inProgressIcon} alt="In Progress" className="status-icon" />;
@@ -36,16 +39,20 @@ const Board = ({ tickets, groupBy }) => {
         return <img src={toDoIcon} alt="To Do" className="status-icon" />;
       case 'Backlog':
         return <img src={backLogIcon} alt="Backlog" className="status-icon" />;
-      case '4': 
-        return <img src={urgentIcon} alt="Urgent" className="priority-icon" />;
-      case '3': 
-        return <img src={highIcon} alt="High Priority" className="priority-icon" />;
-      case '2': 
-        return <img src={mediumIcon} alt="Medium Priority" className="priority-icon" />;
-      case '1': 
-        return <img src={lowIcon} alt="Low Priority" className="priority-icon" />;
-      case '0': 
-        return <img src={noPriorityIcon} alt="No Priority" className="priority-icon" />;
+      case '4':
+        return <span><img src={urgentIcon} alt="Urgent" className="priority-icon" /> Urgent </span>;
+      case '3':
+        return <span><img src={highIcon} alt="High Priority" className="priority-icon" /> High </span>;
+      case '2':
+        return <span><img src={mediumIcon} alt="Medium Priority" className="priority-icon" /> Medium </span>;
+      case '1':
+        return <span><img src={lowIcon} alt="Low Priority" className="priority-icon" /> Low</span>;
+      case '0':
+        return <span><img src={noPriorityIcon} alt="No Priority" className="priority-icon" /> No priority </span>;
+      case 'Done':
+        return <span><img src={doneIcon} alt="Done" className="status-icon" /></span>;
+      case 'Cancelled':
+        return <span><img src={cancelIcon} alt="Cancelled" className="status-icon" /></span>;
       case 'usr-1':
       case 'usr-2':
       case 'usr-3':
@@ -67,7 +74,6 @@ const Board = ({ tickets, groupBy }) => {
         <div key={group} className="group-column">
           <div className="group-header">
             <div className="group-info">
-              {/* Render the status icon */}
               {renderStatusIcon(group)}
               <span className="group-name">{group}</span>
               <span className="group-count">{groupedTickets[group].length}</span>
@@ -89,3 +95,4 @@ const Board = ({ tickets, groupBy }) => {
 };
 
 export default Board;
+  

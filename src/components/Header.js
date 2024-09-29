@@ -10,6 +10,16 @@ const Header = ({ groupBy, setGroupBy, sortBy, setSortBy }) => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const handleGroupByChange = (e) => {
+    setGroupBy(e.target.value);
+    setIsDropdownOpen(false);
+  };
+
+  const handleSortByChange = (e) => {
+    setSortBy(e.target.value);
+    setIsDropdownOpen(false);
+  };
+
   return (
     <div className="header">
       <div className="display-card" onClick={toggleDropdown}>
@@ -22,7 +32,7 @@ const Header = ({ groupBy, setGroupBy, sortBy, setSortBy }) => {
         <div className="header-dropdown">
           <div className="control-group">
             <label>Grouping:</label>
-            <select value={groupBy} onChange={(e) => setGroupBy(e.target.value)}>
+            <select value={groupBy} onChange={handleGroupByChange}>
               <option value="status">Status</option>
               <option value="user">User</option>
               <option value="priority">Priority</option>
@@ -31,7 +41,7 @@ const Header = ({ groupBy, setGroupBy, sortBy, setSortBy }) => {
 
           <div className="control-group">
             <label>Ordering:</label>
-            <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+            <select value={sortBy} onChange={handleSortByChange}>
               <option value="priority">Priority</option>
               <option value="title">Title</option>
             </select>
